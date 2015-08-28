@@ -10,39 +10,30 @@
 #-------------------------------------------------------------------------------
 import csv
 import math
+from UtilitiesHB import *
+import CSVReader
 
-
-def columnFinder(colToFind):
-    pass
-
-def rowFinder(rowToFind):
-    pass
-
-def plxGenerator():
-    HEADER = ['P 1']
-    BOARD_ORIGIN = [int(raw_input('Board Origin Xcoord:')), int(raw_input('Board Origin Ycoord:'))]
-    BOARD_WIDTH = ['w', unitsConverter(int(raw_input('Board Width:')), False, BOARD_ORIGIN)]
+def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices):
     writableItems = [HEADER, BOARD_WIDTH]
 
     with open('myPLXfile.txt', 'w+') as plxFile:
         for item in writableItems:
+            textWriter(item, plxFile)
+        for item in fiducials:
+            textWriter(item, plxFile)
+        for item in devices:
             textWriter(item, plxFile)
 
 def textWriter(text, myFile):
     fileWriter = csv.writer(myFile, dialect='excel-tab')
     fileWriter.writerow(text)
 
-def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN):
-    if isBoardWidth:
-        # 1 Mil equals 25.4 Microns
-        # Added a tolerance for board width
-        return int(math.ceil(mils * 25.4/100)*100)+300
-    else:
-        return int((mils + BOARD_ORIGIN[0]) * 25.4)
-
 def main():
-    # matrixGenerator()
-    plxGenerator()
+    HEADER, BOARD_ORIGIN, BOARD_WIDTH = varInitializer()
+    fiducials = CSVReader.cadFetch(BOARD_ORIGIN)[0]
+    devices = CSVReader.bomFetch(CSVReader.cadFetch(BOARD_ORIGIN)[1])
+    plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices)
+    raw_input('.plx File created! ')
 
 if __name__ == '__main__':
     main()

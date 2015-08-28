@@ -9,8 +9,9 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 import csv
+from UtilitiesHB import *
 
-def cadFetch():
+def cadFetch(BOARD_ORIGIN):
     references = []
     xCoord = []
     yCoord = []
@@ -35,7 +36,8 @@ def cadFetch():
                 devices.append(device)
             elif startSaving and 'F' in row[0]:
                 if 'GLOBOL' in row[5]:
-                    fiducials.append(['f', row[2], row[1]])
+                    fiducials.append(['f', unitsConverter(int(row[2]), False, BOARD_ORIGIN),
+                    unitsConverter(int(row[1]), False, BOARD_ORIGIN)])
             elif startSaving and (row[0] == ''):
                 break
         return fiducials, devices
@@ -59,8 +61,8 @@ def bomFetch(devices):
         return devices
 
 def main():
-    devices = bomFetch(cadFetch()[1])
-    print devices
+    print cadFetch([200, 200])
+    # raw_input("Wrong file! Use plxHelper ")
 
 if __name__ == '__main__':
     main()
