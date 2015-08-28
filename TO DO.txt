@@ -1,0 +1,4 @@
+-Acomodar unitsConverter para que aplique un board origin a X y otro a y
+-Que pida el nombre de los archivos plx y cad al usuario
+-acomodar en orden por Y
+-usar unitConverter en coordenadas
