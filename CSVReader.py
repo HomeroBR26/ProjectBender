@@ -20,6 +20,7 @@ def cadFetch():
 
     with open('009-00723-01C-top.csv', 'rb') as cadFile:
         reader = csv.reader(cadFile)
+        fiducials = []
         devices = []
         device = []
 
@@ -28,12 +29,16 @@ def cadFetch():
                 startSaving = True
                 continue
             if startSaving and (row[0] != '' and not 'H' in row[0]
-            and not 'TP' in row[0]):
-                device.append(['d', row[0].lower(), row[2], row[1], row[3]])
+            and not 'TP' in row[0] and not 'F' in row[0]):
+                device = ['d', row[2], row[1], row[0].lower(), 'n0000', row[3],
+                'partNo', 'f-1', row[0].lower(), 'SHAPE']
                 devices.append(device)
+            elif startSaving and 'F' in row[0]:
+                if 'GLOBOL' in row[5]:
+                    fiducials.append(['f', row[2], row[1]])
             elif startSaving and (row[0] == ''):
                 break
-        return devices
+        return fiducials, devices
 
 def bomFetch():
     startSaving = False
@@ -52,7 +57,7 @@ def bomFetch():
         # return devices
 
 def main():
-    print bomFetch()
+    print cadFetch()
 
 if __name__ == '__main__':
     main()
