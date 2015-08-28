@@ -40,24 +40,27 @@ def cadFetch():
                 break
         return fiducials, devices
 
-def bomFetch():
+def bomFetch(devices):
     startSaving = False
 
     with open('086-00155-02.csv', 'rb') as bomFile:
         reader = csv.reader(bomFile)
-        # devices = []
         # device = []
 
         for row in reader:
             if row[0] == 'Part No':
                 startSaving = True
                 continue
-            if startSaving:
-                print row[8]
-        # return devices
+            if startSaving and row[8] != '':
+                for elem in row[8].split(','):
+                    for component in devices:
+                        if elem.lower() == component[3]:
+                            component[6] = row[4]
+        return devices
 
 def main():
-    print cadFetch()
+    devices = bomFetch(cadFetch()[1])
+    print devices
 
 if __name__ == '__main__':
     main()
