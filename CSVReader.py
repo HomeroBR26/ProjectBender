@@ -31,13 +31,14 @@ def cadFetch(BOARD_ORIGIN):
                 continue
             if startSaving and (row[0] != '' and not 'H' in row[0]
             and not 'TP' in row[0] and not 'F' in row[0]):
-                device = ['d', row[2], row[1], row[0].lower(), 'n0000', row[3],
+                device = ['d', unitsConverter(int(row[2]), False, BOARD_ORIGIN, False),
+                unitsConverter(int(row[1]), False, BOARD_ORIGIN, True), row[0].lower(), 'n0000', row[3],
                 'partNo', 'f-1', row[0].lower(), 'SHAPE']
                 devices.append(device)
             elif startSaving and 'F' in row[0]:
                 if 'GLOBOL' in row[5]:
-                    fiducials.append(['f', unitsConverter(int(row[2]), False, BOARD_ORIGIN),
-                    unitsConverter(int(row[1]), False, BOARD_ORIGIN)])
+                    fiducials.append(['f', unitsConverter(int(row[2]), False, BOARD_ORIGIN, False),
+                    unitsConverter(int(row[1]), False, BOARD_ORIGIN, True)])
             elif startSaving and (row[0] == ''):
                 break
         return fiducials, devices
@@ -61,7 +62,7 @@ def bomFetch(devices):
         return devices
 
 def main():
-    print cadFetch([200, 200])
+    cadFetch([200, 200])
     # raw_input("Wrong file! Use plxHelper ")
 
 if __name__ == '__main__':
