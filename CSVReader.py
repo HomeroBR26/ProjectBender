@@ -59,7 +59,8 @@ def bomFetch(devices):
                     for component in devices:
                         if elem.lower() == component[3]:
                             component[6] = row[4]
-        return devices
+
+        return sorted(devices, key= lambda x: int(x[2]))
 
 def main():
     cadFetch([200, 200])
