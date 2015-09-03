@@ -1,2 +1,1 @@
 -Que pida el nombre de los archivos bom y cad al usuario
--acomodar en orden por Y usando lambdas o itemgetter

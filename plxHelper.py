@@ -13,10 +13,10 @@ import math
 from UtilitiesHB import *
 import CSVReader
 
-def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices):
+def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME):
     writableItems = [HEADER, BOARD_WIDTH]
 
-    with open('myPLXfile.txt', 'w+') as plxFile:
+    with open(PLX_FILENAME + '.plx', 'w+') as plxFile:
         for item in writableItems:
             textWriter(item, plxFile)
         for item in fiducials:
@@ -29,10 +29,12 @@ def textWriter(text, myFile):
     fileWriter.writerow(text)
 
 def main():
+    BOM_FILENAME, CAD_FILENAME, PLX_FILENAME = fileNamer();
     HEADER, BOARD_ORIGIN, BOARD_WIDTH = varInitializer()
-    fiducials = CSVReader.cadFetch(BOARD_ORIGIN)[0]
-    devices = CSVReader.bomFetch(CSVReader.cadFetch(BOARD_ORIGIN)[1])
-    plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices)
+    fiducials, components = CSVReader.cadFetch(BOARD_ORIGIN, CAD_FILENAME)
+    devices = CSVReader.bomFetch(components, BOM_FILENAME)
+    plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME)
+
     raw_input('.plx File created! ')
 
 if __name__ == '__main__':

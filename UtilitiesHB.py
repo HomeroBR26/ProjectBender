@@ -26,8 +26,12 @@ def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, X_COORD):
     else:
         return int((mils + BOARD_ORIGIN[1]) * -25.4)
 
-def sortItems():
-    pass
+def fileNamer():
+    BOM_FILENAME = raw_input('Enter BOM filename: ')
+    CAD_FILENAME = raw_input('Enter CAD filename: ')
+    PLX_FILENAME = BOM_FILENAME
+
+    return BOM_FILENAME, CAD_FILENAME, PLX_FILENAME
 
 def main():
     raw_input("Wrong file! Use plxHelper ")
