@@ -32,7 +32,7 @@ def cadFetch(BOARD_ORIGIN, CAD_FILENAME):
                 'partNo', 'f-1', row[0].lower(), 'SHAPE'])
 
             elif startSaving and 'F' in row[0]:
-                if 'GLOBOL' in row[5]:
+                if 'GLOBOL' in row[5] or 'GLOBAL' in row[5]:
                     fiducials.append(['f', unitsConverter(int(row[2]), False, BOARD_ORIGIN, False),
                     unitsConverter(int(row[1]), False, BOARD_ORIGIN, True)])
 

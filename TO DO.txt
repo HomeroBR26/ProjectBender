@@ -1,1 +1,4 @@
--Que pida el nombre de los archivos bom y cad al usuario
+-Error handling
+-Agregar mensajes de guia
+-Agregar mensajes de error
+--Los archivos BOM y CAD son .csv? un archivo .xls pudiera ser la causa de este error.
