@@ -1,4 +1,5 @@
 -Error handling
--Agregar mensajes de guia
--Agregar mensajes de error
---Los archivos BOM y CAD son .csv? un archivo .xls pudiera ser la causa de este error.
+--Agregar mensajes de guia
+--Agregar mensajes de error
+---Los archivos BOM y CAD son .csv? un archivo .xls pudiera ser la causa de este error.
+-Arrastrar archivos en  lugar de escribirlos

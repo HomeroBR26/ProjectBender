@@ -29,8 +29,8 @@ def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, X_COORD):
 
 
 def fileNamer():
-    BOM_FILENAME = raw_input('Enter BOM filename: ')
-    CAD_FILENAME = raw_input('Enter CAD filename: ')
+    BOM_FILENAME = raw_input('Enter BOM filename: ').replace("\"","").replace(".csv", "")
+    CAD_FILENAME = raw_input('Enter CAD filename: ').replace("\"","").replace(".xls", "")
     PLX_FILENAME = BOM_FILENAME
 
     return BOM_FILENAME, CAD_FILENAME, PLX_FILENAME
