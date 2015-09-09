@@ -26,13 +26,13 @@ def cadFetch(BOARD_ORIGIN, CAD_FILENAME):
                 continue
 
             if startSaving and (row[0] != '' and not 'H' in row[0]
-            and not 'TP' in row[0] and not 'F' in row[0]):
+            and not 'TP' in row[0] and not 'F' in row[0] and not 'N' in row[0]):
                 devices.append(['d', unitsConverter(int(row[2]), False, BOARD_ORIGIN, False),
                 unitsConverter(int(row[1]), False, BOARD_ORIGIN, True), row[0].lower(), 'n0000', row[3],
                 'partNo', 'f-1', row[0].lower(), 'SHAPE'])
 
             elif startSaving and 'F' in row[0]:
-                if 'GLOBOL' in row[5] or 'GLOBAL' in row[5]:
+                if 'GLOBAL' in row[6]:
                     fiducials.append(['f', unitsConverter(int(row[2]), False, BOARD_ORIGIN, False),
                     unitsConverter(int(row[1]), False, BOARD_ORIGIN, True)])
 
@@ -48,16 +48,21 @@ def bomFetch(devices, BOM_FILENAME):
         reader = csv.reader(bomFile)
 
         for row in reader:
+            currentDevices = []
+            for elem in row[8].split(','):
+                currentDevices.extend(deviceEnumerator(elem))
 
             if row[0] == 'Part No':
                 startSaving = True
                 continue
 
             if startSaving and row[8] != '':
-                for elem in row[8].split(','):
+                for elem in currentDevices:
                     for component in devices:
                         if elem.lower() == component[3]:
                             component[6] = row[4]
+
+
 
         return sorted(devices, key= lambda x: int(x[2]))
 
