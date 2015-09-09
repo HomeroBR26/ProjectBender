@@ -48,16 +48,21 @@ def bomFetch(devices, BOM_FILENAME):
         reader = csv.reader(bomFile)
 
         for row in reader:
+            currentDevices = []
+            for elem in row[8].split(','):
+                currentDevices.extend(deviceEnumerator(elem))
 
             if row[0] == 'Part No':
                 startSaving = True
                 continue
 
             if startSaving and row[8] != '':
-                for elem in row[8].split(','):
+                for elem in currentDevices:
                     for component in devices:
                         if elem.lower() == component[3]:
                             component[6] = row[4]
+
+
 
         return sorted(devices, key= lambda x: int(x[2]))
 

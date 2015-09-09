@@ -16,6 +16,7 @@ def varInitializer():
     BOARD_WIDTH = ['w', unitsConverter(int(raw_input('Board Width: ')), True, BOARD_ORIGIN, False)]
     return HEADER, BOARD_ORIGIN, BOARD_WIDTH
 
+
 def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, X_COORD):
     if isBoardWidth:
         # 1 Mil equals 25.4 Microns
@@ -26,12 +27,24 @@ def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, X_COORD):
     else:
         return int((mils + BOARD_ORIGIN[1]) * -25.4)
 
+
 def fileNamer():
     BOM_FILENAME = raw_input('Enter BOM filename: ')
     CAD_FILENAME = raw_input('Enter CAD filename: ')
     PLX_FILENAME = BOM_FILENAME
 
     return BOM_FILENAME, CAD_FILENAME, PLX_FILENAME
+
+
+def deviceEnumerator(myString):
+    if '-' in myString:
+        strMod = myString.split('-')
+        devRange = range(int(filter(lambda x: x.isdigit(), strMod[0])),
+                         int(filter(lambda x: x.isdigit(), strMod[1]))+1)
+        devType = filter(lambda x: x.isalpha(), strMod[0])
+        return [devType + str(d) for d in devRange]
+    else:
+        return [myString.replace(' ','')]
 
 def main():
     raw_input("Wrong file! Use plxHelper ")
