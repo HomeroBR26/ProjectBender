@@ -29,13 +29,20 @@ def textWriter(text, myFile):
     fileWriter.writerow(text)
 
 def main():
-    BOM_FILENAME, CAD_FILENAME, PLX_FILENAME = fileNamer();
-    HEADER, BOARD_ORIGIN, BOARD_WIDTH = varInitializer()
-    fiducials, components = CSVReader.cadFetch(BOARD_ORIGIN, CAD_FILENAME)
-    devices = CSVReader.bomFetch(components, BOM_FILENAME)
-    plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME)
+    while True:
+        try:
+            BOM_FILENAME, CAD_FILENAME, PLX_FILENAME = fileNamer();
+            HEADER, BOARD_ORIGIN, BOARD_WIDTH = varInitializer()
+            fiducials, components = CSVReader.cadFetch(BOARD_ORIGIN, CAD_FILENAME)
+            devices = CSVReader.bomFetch(components, BOM_FILENAME)
+            plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME)
+            break
+        except IOError:
+            print '\nError al tratar de abrir el archivo, la direccion puede '+\
+            'ser incorrecta\no la extension diferente a .csv\n'
 
-    raw_input('.plx File created! ')
+    raw_input('\nEl archivo .plx ha sido creado con exito! ASEGURESE DE'+\
+              ' QUE EL NOMBRE DEL ARCHIVO SEA IGUAL AL DEL BOM\n')
 
 if __name__ == '__main__':
     main()

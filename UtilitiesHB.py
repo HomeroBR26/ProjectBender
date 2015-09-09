@@ -12,8 +12,17 @@ import math
 
 def varInitializer():
     HEADER = ['P 1']
-    BOARD_ORIGIN = [int(raw_input('Board Origin Xcoord: ')), int(raw_input('Board Origin Ycoord: '))]
-    BOARD_WIDTH = ['w', unitsConverter(int(raw_input('Board Width: ')), True, BOARD_ORIGIN, False)]
+    while True:
+        try:
+            BOARD_ORIGIN = [int(raw_input('\nCoordenada X del origen de la tablilla: ')),
+                            int(raw_input('\nCoordenada Y del origen de la tablilla: '))]
+            BOARD_WIDTH = ['w', unitsConverter(int(raw_input('\nAncho de la tablilla: ')),
+                           True, BOARD_ORIGIN, False)]
+            break
+        except (TypeError, ValueError):
+            print '\nIntroduzca un valor numerico '+\
+            '(no se permiten los caracteres alfabeticos)\n'
+
     return HEADER, BOARD_ORIGIN, BOARD_WIDTH
 
 
@@ -29,8 +38,8 @@ def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, X_COORD):
 
 
 def fileNamer():
-    BOM_FILENAME = raw_input('Enter BOM filename: ').replace(".csv", "").replace("\"","")
-    CAD_FILENAME = raw_input('Enter CAD filename: ').replace(".csv", "").replace("\"","")
+    BOM_FILENAME = raw_input('Introduzca la direccion del archivo BOM: ').replace(".csv", "").replace("\"","")
+    CAD_FILENAME = raw_input('\nIntroduzca la direccion del archivo CAD: ').replace(".csv", "").replace("\"","")
     PLX_FILENAME = BOM_FILENAME
 
     return BOM_FILENAME, CAD_FILENAME, PLX_FILENAME
