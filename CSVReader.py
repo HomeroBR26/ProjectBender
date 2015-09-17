@@ -1,8 +1,9 @@
 #-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
+# Name:        CSVReader
+# Purpose:     Contanis methods to go and fetch information from CAD and BOM
+#              files.
 #
-# Author:      MAT.TE
+# Author:      Homero Benavides
 #
 # Created:     20/08/2015
 # Copyright:   (c) MAT.TE 2015
@@ -12,7 +13,11 @@ import csv
 from UtilitiesHB import *
 
 def cadFetch(BOARD_ORIGIN, CAD_FILENAME):
-    """ """
+    """Read and save all useful information from CAD file.
+
+    BOARD_ORIGIN -- offset used for this board
+    CAD_FILENAME -- CAD file's path
+    """
     startSaving = False
 
     with open(CAD_FILENAME + '.csv', 'rb') as cadFile:
@@ -49,7 +54,11 @@ def cadFetch(BOARD_ORIGIN, CAD_FILENAME):
         return fiducials, devices
 
 def bomFetch(devices, BOM_FILENAME):
-    """ """
+    """Read and save all useful information from BOM file.
+
+    devices -- list containing all devices and their information
+    BOM_FILENAME -- BOM file's path
+    """
     startSaving = False
 
     with open(BOM_FILENAME + '.csv', 'rb') as bomFile:

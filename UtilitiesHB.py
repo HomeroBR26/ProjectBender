@@ -1,8 +1,9 @@
 #-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
+# Name:        UtilitiesHB
+# Purpose:     Provides useful and widely used methods to help with simple
+#              tasks regarding the plxHelper.
 #
-# Author:      MAT.TE
+# Author:      Homero Benavides
 #
 # Created:     28/08/2015
 # Copyright:   (c) MAT.TE 2015
@@ -33,7 +34,6 @@ def varInitializer():
 def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN, isXcoord):
     """Convert mil units to micron units.
 
-    Keyword Arguments:
     mils -- value in mils
     isBoardWidth -- is the current value a board width?
     BOARD_ORIGIN -- offset used for this board

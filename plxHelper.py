@@ -1,8 +1,9 @@
 #-------------------------------------------------------------------------------
-# Name:        module1
-# Purpose:
+# Name:        plxHelper
+# Purpose:     Main module. Creates the structure of the plx file
+#              and writes the data to a new file.
 #
-# Author:      MAT.TE
+# Author:      Homero Benavides
 #
 # Created:     20/08/2015
 # Copyright:   (c) MAT.TE 2015
@@ -14,7 +15,14 @@ from UtilitiesHB import *
 import CSVReader
 
 def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME):
-    """ """
+    """Create a PLX file and write all the information to it.
+
+    HEADER -- header of the PLX file
+    BOARD_WIDTH -- width of the current board
+    fiducials -- list containing all fiducials and their information
+    devices -- list containing all devices and their information
+    PLX_FILENAME -- name that is going to be asigned to the file
+    """
     writableItems = [HEADER, BOARD_WIDTH]
 
     with open(PLX_FILENAME + '.plx', 'w+') as plxFile:

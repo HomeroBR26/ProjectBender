@@ -1,4 +1,0 @@
--docstrings
--user manual
--modificar datos de los .py
--buscar como escribir versiones
