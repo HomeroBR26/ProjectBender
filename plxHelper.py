@@ -14,6 +14,7 @@ from UtilitiesHB import *
 import CSVReader
 
 def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME):
+    """ """
     writableItems = [HEADER, BOARD_WIDTH]
 
     with open(PLX_FILENAME + '.plx', 'w+') as plxFile:
@@ -25,15 +26,18 @@ def plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME):
             textWriter(item, plxFile)
 
 def textWriter(text, myFile):
+    """Write information in a tab-delimited format to given file."""
     fileWriter = csv.writer(myFile, dialect='excel-tab')
     fileWriter.writerow(text)
 
 def main():
+    """Execute main program."""
     while True:
         try:
             BOM_FILENAME, CAD_FILENAME, PLX_FILENAME = fileNamer();
             HEADER, BOARD_ORIGIN, BOARD_WIDTH = varInitializer()
-            fiducials, components = CSVReader.cadFetch(BOARD_ORIGIN, CAD_FILENAME)
+            fiducials, components = CSVReader.cadFetch(BOARD_ORIGIN,
+                                                       CAD_FILENAME)
             devices = CSVReader.bomFetch(components, BOM_FILENAME)
             plxGenerator(HEADER, BOARD_WIDTH, fiducials, devices, PLX_FILENAME)
             break
