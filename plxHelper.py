@@ -11,6 +11,7 @@
 import csv
 import math
 
+
 def columnFinder(colToFind):
     pass
 
@@ -18,11 +19,10 @@ def rowFinder(rowToFind):
     pass
 
 def plxGenerator():
-    HEADER = ['P', '1']
-    boardWidth = ['w', int(math.ceil(int(raw_input('Board Width:')) * 25.4/100)*100)+300]  # 1 Mil equals 25.4 Microns
-    fiducial1 = ['f', raw_input('Fiducial 1 Xcoord:'), raw_input('Fiducial 1 Ycoord:')]
-    fiducial2 = ['f', raw_input('Fiducial 2 Xcoord:'), raw_input('Fiducial 2 Ycoord:')]
-    writableItems = [HEADER, boardWidth, fiducial1, fiducial2]
+    HEADER = ['P 1']
+    BOARD_ORIGIN = [int(raw_input('Board Xcoord:')), int(raw_input('Board Ycoord:'))]
+    BOARD_WIDTH = ['w', unitsConverter(int(raw_input('Board Width:')), False, BOARD_ORIGIN)]
+    writableItems = [HEADER, BOARD_WIDTH]
 
     with open('myPLXfile.txt', 'w+') as plxFile:
         for item in writableItems:
@@ -32,8 +32,16 @@ def textWriter(text, myFile):
     fileWriter = csv.writer(myFile, dialect='excel-tab')
     fileWriter.writerow(text)
 
+def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN):
+    if isBoardWidth:
+        # 1 Mil equals 25.4 Microns
+        # Added a tolerance for board width
+        return int(math.ceil(mils * 25.4/100)*100)+300
+    else:
+        return int((mils + BOARD_ORIGIN[0]) * 25.4)
 
 def main():
+    matrixGenerator()
     plxGenerator()
 
 if __name__ == '__main__':
