@@ -36,10 +36,23 @@ def cadFetch():
         return devices
 
 def bomFetch():
-    pass
+    startSaving = False
+
+    with open('086-00155-02.csv', 'rb') as bomFile:
+        reader = csv.reader(bomFile)
+        # devices = []
+        # device = []
+
+        for row in reader:
+            if row[0] == 'Part No':
+                startSaving = True
+                continue
+            if startSaving:
+                print row[8]
+        # return devices
 
 def main():
-    print cadFetch()
+    print bomFetch()
 
 if __name__ == '__main__':
     main()
