@@ -20,7 +20,7 @@ def rowFinder(rowToFind):
 
 def plxGenerator():
     HEADER = ['P 1']
-    BOARD_ORIGIN = [int(raw_input('Board Xcoord:')), int(raw_input('Board Ycoord:'))]
+    BOARD_ORIGIN = [int(raw_input('Board Origin Xcoord:')), int(raw_input('Board Origin Ycoord:'))]
     BOARD_WIDTH = ['w', unitsConverter(int(raw_input('Board Width:')), False, BOARD_ORIGIN)]
     writableItems = [HEADER, BOARD_WIDTH]
 
@@ -41,7 +41,7 @@ def unitsConverter(mils, isBoardWidth, BOARD_ORIGIN):
         return int((mils + BOARD_ORIGIN[0]) * 25.4)
 
 def main():
-    matrixGenerator()
+    # matrixGenerator()
     plxGenerator()
 
 if __name__ == '__main__':
